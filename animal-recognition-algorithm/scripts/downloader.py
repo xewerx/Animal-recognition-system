@@ -71,8 +71,10 @@ def download_one_image(bucket, split, image_id, download_folder):
     bucket.download_file(f'{split}/{image_id}.jpg',
                          os.path.join(download_folder, f'{image_id}.jpg'))
   except botocore.exceptions.ClientError as exception:
-    sys.exit(
-        f'ERROR when downloading image `{split}/{image_id}`: {str(exception)}')
+    print(f'ERROR when downloading image `{split}/{image_id}`')
+    return
+    # sys.exit(
+    #     f'ERROR when downloading image `{split}/{image_id}`: {str(exception)}')
 
 
 def download_all_images(args):

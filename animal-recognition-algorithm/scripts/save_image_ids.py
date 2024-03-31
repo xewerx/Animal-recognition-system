@@ -14,15 +14,13 @@ def find_class_id_by_name(name):
                 return row[0]
     return None
 
-def find_image_ids_by_class_id(class_id):
+def find_image_ids_by_class_id(class_id, limit):
     rows = []
-    limit = 1
     i = 0
     with open(IMAGES_FILE, mode='r') as file:
         reader = csv.reader(file)
         for row in reader:
             if row[2] == class_id and row[3] == "1.0":
-                print(row)
                 rows.append(row[0])
                 i += 1
                 if i > limit:
@@ -38,7 +36,13 @@ if __name__ == '__main__':
       type=str,
       default=None,
       help='Class name of images to download')
-        
+
+    parser.add_argument(
+      'limit',
+      type=int,
+      default=None,
+      help='Limit of images to download')
+          
     args = vars(parser.parse_args())
 
     class_id = find_class_id_by_name(args["class_name"])
@@ -46,7 +50,7 @@ if __name__ == '__main__':
     if not class_id:
         raise Exception("Class not found")
 
-    image_ids = find_image_ids_by_class_id(class_id)
+    image_ids = find_image_ids_by_class_id(class_id, args["limit"])
 
     with open(IMAGES_IDS_SAVE_PATH, "w") as file:
         for string in image_ids:
