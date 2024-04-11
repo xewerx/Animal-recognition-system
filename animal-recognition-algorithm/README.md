@@ -29,7 +29,7 @@ pipenv run get_image_ids class_name
 ```
 
 ```
-pipenv run dowload_images
+pipenv run download_images
 ```
 
 You can find downloaded images in `data/images` directory

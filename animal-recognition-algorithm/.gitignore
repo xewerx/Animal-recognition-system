@@ -1,4 +1,6 @@
 .venv
 data/*.csv
-data/images/*
+data/training_images/*
 .DS_Store
+__pycache__
+logs
