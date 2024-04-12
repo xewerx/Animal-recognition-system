@@ -3,11 +3,12 @@ import numpy as np
 import tensorflow as tf
 
 from config import IMG_HEIGHT, IMG_WIDTH
+from utils.get_data_class_names import get_data_class_names
 
-class_names = ['lion', 'shark', 'tiger']
 
 def predict_image_class():
   model = tf.keras.models.load_model('models/model.keras')
+  class_names = get_data_class_names()
 
   img = tf.keras.utils.load_img(
       'data/test_images/shark.jpeg', target_size=(IMG_HEIGHT, IMG_WIDTH)
