@@ -16,4 +16,5 @@ python_full_version = "3.11.8"
 
 [scripts]
 get_image_ids = "python scripts/save_image_ids.py"
-dowload_images = "python scripts/downloader.py 'data/image_ids.txt' --download_folder='data/images' --num_processes=5"
+download_images = "python scripts/downloader.py 'data/image_ids.txt' --download_folder='data/images/lion' --num_processes=5"
+train_model = "python scripts/train_model.py"
