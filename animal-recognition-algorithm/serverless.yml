@@ -1,0 +1,25 @@
+service: animal-recognizer
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: python3.11
+  region: eu-west-1
+  stage: dev
+
+package:
+  patterns:
+    - "!data/**/*"
+    - "!.serverless/**/*"
+    - "!__pycache__/**/*"
+    - "!.venv/**/*"
+    - "!models/**/*"
+
+    - "src/**/*"
+
+functions:
+  animal-recognizer:
+    image: 271266592525.dkr.ecr.eu-west-1.amazonaws.com/animal-recognizer-lambda-image:latest
+    timeout: 360
+    memorySize: 3008
+    architecture: arm64

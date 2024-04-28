@@ -1,0 +1,43 @@
+FROM public.ecr.aws/lambda/python:3.11
+
+# Install required OS packages 
+RUN yum -y install tar gzip zlib freetype-devel \
+    gcc \
+    ghostscript \
+    lcms2-devel \
+    libffi-devel \
+    libimagequant-devel \
+    libjpeg-devel \
+    libraqm-devel \
+    libtiff-devel \
+    libwebp-devel \
+    make \
+    openjpeg2-devel \
+    rh-python36 \
+    rh-python36-python-virtualenv \
+    sudo \
+    tcl-devel \
+    tk-devel \
+    tkinter \
+    which \
+    xorg-x11-server-Xvfb \
+    zlib-devel \
+    && yum clean all
+
+# Copy and install required dependencies
+COPY src/lambdas/requirements.txt ./
+
+RUN pip install h5py --only-binary h5py
+RUN python3.11 -m pip install -r requirements.txt
+
+# Copy code
+COPY src/lambdas/animal-recognizer.py ./
+COPY src/utils/get_img_from_base64.py ./
+COPY config.py ./
+
+# Copy model
+RUN mkdir models
+COPY models/model.keras ./models
+
+# Run lambda
+CMD ["animal-recognizer.handler"]
