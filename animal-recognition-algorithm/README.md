@@ -19,7 +19,7 @@ pipenv install
 ```
 
 ```
-pipenv install
+serverless plugin install -n serverless-dotenv-plugin
 ```
 
 ## Run pipenv shell
@@ -35,7 +35,7 @@ pipenv run get_image_ids class_name
 ```
 
 ```
-serverless plugin install -n serverless-dotenv-plugin
+pipenv run download_images
 ```
 
 You can find downloaded images in `data/images` directory
