@@ -5,8 +5,8 @@ import matplotlib.pyplot as plt
 import tensorflow as tf
 
 from tensorflow import keras
-from tensorflow.keras import layers
-from tensorflow.keras.models import Sequential
+from tensorflow.keras import layers # type: ignore
+from tensorflow.keras.models import Sequential # type: ignore
 
 sys.path.append('../animal-recognition-algorithm')
 from config import DATA_PATH, IMG_HEIGHT, IMG_WIDTH, BATCH_SIZE, EPOCHS, MODELS_PATH
