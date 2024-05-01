@@ -27,12 +27,18 @@ def handler(event, _):
     predictions = model.predict(img_array)
     score = tf.nn.softmax(predictions[0])
 
+    predicted_class = CLASS_NAMES[np.argmax(score)]
+    prediction_confidence = 100 * np.max(score)
+
     print(
         "This image most likely belongs to {} with a {:.2f} percent confidence."
-        .format(CLASS_NAMES[np.argmax(score)], 100 * np.max(score))
+        .format(predicted_class, prediction_confidence)
         )
     
     return {
         'statusCode': 200,
-        'body': 'ok'
+        'body': {
+            'predicted_class': predicted_class,
+            'prediction_confidence': prediction_confidence
+        }
     }

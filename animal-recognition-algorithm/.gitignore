@@ -6,3 +6,4 @@ data/training_images/*
 __pycache__
 logs
 .serverless
+node_modules

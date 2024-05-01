@@ -18,6 +18,10 @@ wget -P /data https://storage.googleapis.com/openimages/v7/oidv7-train-annotatio
 pipenv install
 ```
 
+```
+pipenv install
+```
+
 ## Run pipenv shell
 
 ```
@@ -31,7 +35,7 @@ pipenv run get_image_ids class_name
 ```
 
 ```
-pipenv run download_images
+serverless plugin install -n serverless-dotenv-plugin
 ```
 
 You can find downloaded images in `data/images` directory
