@@ -1,0 +1,1 @@
+{"version":3,"file":"post-frame.js","sourceRoot":"","sources":["../../../../src/lambdas/http/post-frame.ts"],"names":[],"mappings":"AAEA,MAAM,CAAC,MAAM,OAAO,GAAY,KAAK,EACnC,MAAsB,EACtB,QAAiB,EACjB,EAAE;IACF,OAAO,CAAC,GAAG,CAAC,kBAAkB,CAAC,CAAC;IAEhC,QAAQ;IACR,qCAAqC;IACrC,iBAAiB;IACjB,cAAc;IACd,aAAa;IAEb,OAAO;QACL,UAAU,EAAE,GAAG;KAChB,CAAC;AACJ,CAAC,CAAC"}
