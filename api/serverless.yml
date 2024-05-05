@@ -25,10 +25,14 @@ provider:
   region: ${self:custom.configFile.REGION}
   environment:
     STAGE: ${self:provider.stage}
+    REGION: ${self:provider.region}
+    ACCOUNT_ID: ${self:custom.configFile.ACCOUNT_ID}
 
 functions:
   - ${file(infrastructure/functions.yml)}
-# resources:
-#   - ${file(infrastructure/auth.yml)}
-#   - ${file(infrastructure/database.yml)}
-#   - ${file(infrastructure/queues.yml)}
+
+resources:
+  # - ${file(infrastructure/auth.yml)}
+  - ${file(infrastructure/database.yml)}
+  - ${file(infrastructure/queues.yml)}
+  - ${file(infrastructure/s3.yml)}

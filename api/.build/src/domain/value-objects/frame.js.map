@@ -1,1 +1,0 @@
-{"version":3,"file":"frame.js","sourceRoot":"","sources":["../../../../src/domain/value-objects/frame.ts"],"names":[],"mappings":"AAAA,MAAM,OAAO,KAAK;IAChB,YAAY,KAAY;QACtB,IAAI,CAAC,KAAK,GAAG,KAAK,CAAC,KAAK,CAAC;QACzB,IAAI,CAAC,SAAS,GAAG,KAAK,CAAC,SAAS,CAAC;IACnC,CAAC;IAEQ,KAAK,CAAS;IACd,SAAS,CAAS;CAC5B"}

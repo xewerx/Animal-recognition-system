@@ -4,6 +4,7 @@ import { logger } from "../../services/logger";
 import { BadRequestException, HttpException } from "../../shared/exceptions";
 import { HttpStatus } from "../../shared/http-status";
 import { makeResponse } from "../../utils/make-response";
+import { CreateFrameCommand } from "../../commands/create-frame";
 
 const schema = joi
   .object({
@@ -18,19 +19,25 @@ export const handler: APIGatewayProxyWithCognitoAuthorizerHandler = async (
   logger.info({ event }, "Started lambda execution");
 
   try {
-    const { error } = schema.validate(event.body);
+    const { body } = event;
+
+    if (!body) {
+      throw new BadRequestException("Missing body");
+    }
+
+    const { error, value: validatedBody } = schema.validate(body);
 
     if (error) {
       throw new BadRequestException(error.message);
     }
 
-    const result = event.body;
+    const createFrameCommand = new CreateFrameCommand();
 
-    // TODO:
-    // Save to Dynamo
-    // Send to SQS
+    await createFrameCommand.exec({
+      data: validatedBody.imageBase64,
+    });
 
-    return makeResponse(result, HttpStatus.NO_CONTENT);
+    return makeResponse({}, HttpStatus.NO_CONTENT);
   } catch (err) {
     if (err instanceof HttpException) {
       logger.info({ event }, "User error while executing lambda");
