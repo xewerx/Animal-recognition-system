@@ -1,0 +1,3 @@
+Resources:
+  FrameQue:
+    Type: AWS::SQS::Queue

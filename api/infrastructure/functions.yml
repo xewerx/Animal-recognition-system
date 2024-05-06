@@ -1,0 +1,31 @@
+createFrame:
+  handler: src/lambdas/http/post-frame.handler
+  environment:
+    FRAME_TABLE: !Ref FrameTable
+    BUCKET_NAME: !Ref Bucket
+    QUEUE_URL: !Ref FrameQue
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:PutItem
+      Resource: !GetAtt FrameTable.Arn
+    - Effect: Allow
+      Action:
+        - sqs:sendmessage
+      Resource: !GetAtt FrameQue.Arn
+    - Effect: Allow
+      Action:
+        - s3:PutObject
+      Resource:
+        Fn::Join:
+          - ""
+          - - !GetAtt Bucket.Arn
+            - "/*"
+  events:
+    - http:
+        path: frames
+        method: post
+        # authorizer:
+        #   name: UserPoolAuthorizer
+        #   type: COGNITO_USER_POOLS
+        #   arn: !GetAtt CognitoUserPool.Arn
