@@ -3,22 +3,13 @@ frameworkVersion: "3"
 
 plugins:
   - serverless-dotenv-plugin
+  - serverless-iam-roles-per-function
 
 provider:
   name: aws
   runtime: python3.11
-  region: eu-west-1
-  stage: dev
-
-package:
-  patterns:
-    - "!data/**/*"
-    - "!.serverless/**/*"
-    - "!__pycache__/**/*"
-    - "!.venv/**/*"
-    - "!models/**/*"
-
-    - "src/**/*"
+  region: ${env:REGION}
+  stage: ${env:STAGE}
 
 functions:
   animal-recognizer:
@@ -26,3 +17,18 @@ functions:
     timeout: 360
     memorySize: 3008
     architecture: arm64
+    environment:
+      FRAME_DYNAMO_TABLE: ${env:FRAME_DYNAMO_TABLE}
+      FRAME_S3_BUCKET: ${env:FRAME_S3_BUCKET}
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - s3:GetObject
+        Resource: arn:aws:s3:::${env:FRAME_S3_BUCKET}/*
+      - Effect: Allow
+        Action:
+          - dynamodb:UpdateItem
+        Resource: arn:aws:dynamodb:${self:provider.region}:${env:AWS_ACCOUNT_ID}:table/${env:FRAME_DYNAMO_TABLE}
+    events:
+      - sqs:
+          arn: arn:aws:sqs:${self:provider.region}:${env:AWS_ACCOUNT_ID}:${env:FRAME_SQS_NAME}
