@@ -14,7 +14,7 @@ while ret:
 
     key_pressed = cv2.waitKey(30)
     
-    if key_pressed == ord('q'):
+    if key_pressed == ord('q' or 'Q'):
        break
 
 video.release()
