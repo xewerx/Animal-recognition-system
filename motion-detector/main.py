@@ -60,6 +60,11 @@ def detection_events():
 
 
         _, frame_to_send = cap.read()
+
+
+        # Zapisz obraz jako plik JPEG zakodowany w Base64
+        frame_to_send = save_snapshot_as_base64(frame_to_send, directory='./output_photos')
+
      
 
         winsound.Beep(2500, 1000) #powiadomienie dźwiękowe - do wywalenia.

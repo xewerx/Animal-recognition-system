@@ -2,7 +2,10 @@ import cv2
 import base64
 from datetime import datetime
 
-def save_snapshot_as_base64(image, directory='./output_photos'):
+directory='./output_photos'
+
+
+def save_snapshot_as_base64(image, directory):
     """
     Zapisuje obraz z OpenCV jako plik JPEG zakodowany w Base64.
 
