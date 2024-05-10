@@ -1,3 +1,6 @@
 Resources:
   FrameQue:
     Type: AWS::SQS::Queue
+    Properties:
+      QueueName: ${self:custom.resourceSlug}-frame-queue
+      VisibilityTimeout: 360
