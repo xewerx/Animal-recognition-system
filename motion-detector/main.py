@@ -11,7 +11,7 @@ from detection_events import motion_events
 
 
 
-video_path = os.path.join('.', 'input', 'input.mp4')
+video_path = os.path.join('.', 'input', 'tiger2.mp4')
 source = 'input/input.mp4' # nie działa ta wersja
 
 # Tworzenie obiektu kamery wideo, może być w nawiasie np (0,1,2,3 i przełączanie między nimi jeśli kamer/źródeł jest więcej)
