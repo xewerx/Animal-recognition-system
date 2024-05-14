@@ -3,7 +3,6 @@ import React,{useEffect} from 'react'
 import { useNavigate } from 'react-router-dom';
 import userpool from '../userpool'
 import { logout } from '../services/authenticate';
-
 const Dashboard = () => {
 
   const Navigate = useNavigate();
