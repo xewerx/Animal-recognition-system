@@ -4,6 +4,7 @@ frameworkVersion: "3"
 plugins:
   - serverless-webpack
   - serverless-iam-roles-per-function
+  - serverless-add-api-key
 
 package:
   individually: true
@@ -16,6 +17,17 @@ custom:
     excludeFiles: src/**/*.test.ts
   configFile: ${file(config.yml):}
   resourceSlug: api-${self:custom.configFile.STAGE}
+  apiKeys:
+    - name: motion-detector-api-key
+      usagePlan:
+        name: "motion-detector-usage-plan"
+        description: "Used by motion detector to send frames"
+        quota:
+          limit: 1000
+          period: DAY
+        throttle:
+          burstLimit: 100
+          rateLimit: 20
 
 provider:
   name: aws
@@ -32,7 +44,7 @@ functions:
   - ${file(infrastructure/functions.yml)}
 
 resources:
-  # - ${file(infrastructure/auth.yml)}
+  - ${file(infrastructure/auth.yml)}
   - ${file(infrastructure/database.yml)}
   - ${file(infrastructure/queues.yml)}
   - ${file(infrastructure/s3.yml)}

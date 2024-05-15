@@ -1,0 +1,33 @@
+Resources:
+  CognitoUserPool:
+    Type: AWS::Cognito::UserPool
+    Properties:
+      UserPoolName: api-auth
+      AutoVerifiedAttributes:
+        - email
+      UsernameAttributes:
+        - email
+      Schema:
+        - AttributeDataType: String
+          Name: name
+          Required: false
+          Mutable: true
+
+  UserInterfaceUserPoolClient:
+    Type: AWS::Cognito::UserPoolClient
+    Properties:
+      UserPoolId: !Ref CognitoUserPool
+      ClientName: user-interface
+      ExplicitAuthFlows:
+        - ALLOW_USER_SRP_AUTH
+        - ALLOW_USER_PASSWORD_AUTH
+        - ALLOW_REFRESH_TOKEN_AUTH
+      PreventUserExistenceErrors: ENABLED
+      CallbackURLs:
+        - http://localhost:3000/
+
+  UserInterfaceUserPoolCustomDomain:
+    Type: AWS::Cognito::UserPoolDomain
+    Properties:
+      Domain: animal-recognition-api
+      UserPoolId: !Ref CognitoUserPool
