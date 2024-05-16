@@ -17,7 +17,7 @@ const Login = () => {
   const [passwordErr, setPasswordErr] = useState('');
   const [loginErr,setLoginErr]=useState('');
 
-  const formInputChange = (formField, value) => {
+  const formInputChange = (formField: string, value: React.SetStateAction<string>) => {
     if (formField === "email") {
       setEmail(value);
     }
@@ -26,8 +26,14 @@ const Login = () => {
     }
   };
 
-  const validation = () => {
-    return new Promise((resolve, reject) => {
+  interface ValidationResponse {
+    email: string;
+    password: string;
+  }
+
+
+  const validation = (): Promise<ValidationResponse> => {
+    
       if (email === '' && password === '') {
         setEmailErr("Email is Required");
         setPasswordErr("Password is required")
@@ -48,7 +54,9 @@ const Login = () => {
       else {
         resolve({ email: "", password: "" });
       }
-    });
+    
+    
+    return Promise.resolve({ email: '', password: '' });
   };
 
   const handleClick = () => {
@@ -95,7 +103,7 @@ const Login = () => {
         <div className='formfield'>
           <Button type='submit' variant='contained' onClick={handleClick}>Login</Button>
         </div>
-        <Typography variant="body">{loginErr}</Typography>
+        <Typography variant="body1">{loginErr}</Typography>
       </div>
 
     </div>
@@ -103,3 +111,7 @@ const Login = () => {
 }
 
 export default Login
+
+function resolve(arg0: { email: string; password: string; }) {
+  throw new Error('Function not implemented.');
+}
