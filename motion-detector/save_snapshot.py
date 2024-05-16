@@ -1,6 +1,7 @@
 import cv2
 import base64
 from datetime import datetime
+import os
 
 directory='./output_photos'
 
@@ -15,6 +16,12 @@ def save_snapshot_as_base64(image, directory):
     Returns:
         str: Zakodowany obraz w formacie Base64.
     """
+    if image is None:
+        raise ValueError("Obraz jest pusty.")
+    
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+    
     # Pobierz aktualną datę i godzinę
     current_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     
