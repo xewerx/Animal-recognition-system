@@ -25,7 +25,22 @@ createFrame:
     - http:
         path: frames
         method: post
-        # authorizer:
-        #   name: UserPoolAuthorizer
-        #   type: COGNITO_USER_POOLS
-        #   arn: !GetAtt CognitoUserPool.Arn
+        private: true
+
+getFrames:
+  handler: src/lambdas/http/get-frames.handler
+  environment:
+    FRAME_TABLE: !Ref FrameTable
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Scan
+      Resource: !GetAtt FrameTable.Arn
+  events:
+    - http:
+        path: frames
+        method: get
+        authorizer:
+          name: UserPoolAuthorizer
+          type: COGNITO_USER_POOLS
+          arn: !GetAtt CognitoUserPool.Arn

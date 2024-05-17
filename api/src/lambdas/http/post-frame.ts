@@ -25,7 +25,8 @@ export const handler: APIGatewayProxyWithCognitoAuthorizerHandler = async (
       throw new BadRequestException("Missing body");
     }
 
-    const { error, value: validatedBody } = schema.validate(body);
+    const parsedBody = JSON.parse(body)
+    const { error, value: validatedBody } = schema.validate(parsedBody);
 
     if (error) {
       throw new BadRequestException(error.message);

@@ -1,0 +1,12 @@
+# Ignorowanie plików środowiskowych
+.env
+
+# Ignorowanie plików z konfiguracjami edytorów
+.vscode/
+.idea/
+
+# Ignorowanie plików kompilacji i środowisk wirtualnych
+__pycache__/
+*.pyc
+venv/
+tests/

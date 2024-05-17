@@ -6,7 +6,7 @@ export class FrameRepository extends Repository {
     super("FRAME_TABLE");
   }
 
-  async create() {
+  async create(): Promise<FrameModel> {
     const now = new Date().toISOString();
 
     const frameModel: FrameModel = {
@@ -27,5 +27,15 @@ export class FrameRepository extends Repository {
       .promise();
 
     return frameModel;
+  }
+
+  async findAll(): Promise<FrameModel[]> {
+    const { Items: frames } = await this.documentClient
+      .scan({
+        TableName: this.tableName,
+      })
+      .promise();
+
+    return frames as FrameModel[];
   }
 }
