@@ -12,7 +12,7 @@ import base64
 from dotenv import load_dotenv
 import os
 
-video_path = os.path.join('.', 'input', 'moose.mp4')
+video_path = os.path.join('.', 'input', 'tiger4.mp4')
 
 cap = cv2.VideoCapture(video_path)
 
@@ -58,6 +58,8 @@ def detection_events():
                 print('Success:', response.json())
             else:
                 print('Error:', response.status_code, response.text)
+                
+            winsound.Beep(1000, 1000)
 
             time.sleep(10)
     alarm = False
