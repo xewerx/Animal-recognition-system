@@ -20,8 +20,8 @@ def predict_image_class():
   model = tf.keras.models.load_model('models/model.keras')
   class_names = get_data_class_names()
 
-  img = get_img_from_base64(base64_string_shark)
-  # img = get_img('data/test_images/shark.jpeg')
+  # img = get_img_from_base64(base64_string_shark)
+  img = get_img('data/test_images/tiger2.jpeg')
   
   img_array = tf.keras.utils.img_to_array(img)
   img_array = tf.expand_dims(img_array, 0) # Create a batch
