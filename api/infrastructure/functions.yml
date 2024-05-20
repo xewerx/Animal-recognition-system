@@ -40,6 +40,7 @@ getFrames:
     - http:
         path: frames
         method: get
+        cors: true
         authorizer:
           name: UserPoolAuthorizer
           type: COGNITO_USER_POOLS
