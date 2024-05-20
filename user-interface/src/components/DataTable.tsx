@@ -1,16 +1,7 @@
-// {
-//     "id": "598fd8c4-3276-4157-bc40-253378545293",
-//     "createdAt": "2024-05-15T19:57:26.160Z",
-//     "predictedClass": "shark",
-//     "predictionConfidence": 100,
-//     "processedAt": "2024-05-15T19:57:55.158401",
-//     "updatedAt": "2024-05-15T19:57:55.158401"
-//    }
-
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-interface Data {
+interface Frame {
   id: string;
   createdAt: string;
   predictedClass: string;
@@ -24,19 +15,23 @@ interface DataTableProps {
 }
 
 const DataTable: React.FC<DataTableProps> = ({ token }) => {
-  const [data, setData] = useState<Data | null>(null);
+  const [frames, setFrames] = useState<Frame[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    const getFramesUrl = `${process.env.REACT_APP_API_URL as string}/prod/frames`
+
     const fetchData = async () => {
       try {
-        const response = await axios.get<Data>(process.env.REACT_APP_API_URL || '', {
+        const response = await axios.get<Frame[]>(getFramesUrl, {
           headers: {
             Authorization: `Bearer ${token}`
           }
         });
-        setData(response.data);
+
+        console.log(response.data)
+        setFrames(response.data);
       } catch (error) {
         setError('Error fetching data');
       } finally {
@@ -55,7 +50,7 @@ const DataTable: React.FC<DataTableProps> = ({ token }) => {
     return <div>{error}</div>;
   }
 
-  if (!data) {
+  if (!frames) {
     return <div>No data available</div>;
   }
 
@@ -72,17 +67,23 @@ const DataTable: React.FC<DataTableProps> = ({ token }) => {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>{data.id}</td>
-          <td>{new Date(data.createdAt).toLocaleString()}</td>
-          <td>{data.predictedClass}</td>
-          <td>{data.predictionConfidence}</td>
-          <td>{new Date(data.processedAt).toLocaleString()}</td>
-          <td>{new Date(data.updatedAt).toLocaleString()}</td>
-        </tr>
+        {
+          frames.map((frame, i) => (
+            <tr>
+              {/* <td>{frame.id}</td> */}
+              <td>{i}</td>
+              <td>{new Date(frame.createdAt).toLocaleString()}</td>
+              <td>{frame.predictedClass}</td>
+              <td>{frame.predictionConfidence}</td>
+              <td>{new Date(frame.processedAt).toLocaleString()}</td>
+              <td>{new Date(frame.updatedAt).toLocaleString()}</td>
+            </tr>
+          ))
+        }
       </tbody>
     </table>
-  );
+  )
+
 };
 
 export default DataTable;

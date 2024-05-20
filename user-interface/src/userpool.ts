@@ -3,7 +3,6 @@ import {
   ICognitoUserPoolData,
 } from "amazon-cognito-identity-js";
 
-console.log(process.env.REACT_APP_USER_POOL_ID);
 // Define the type for the pool data
 const poolData: ICognitoUserPoolData = {
   UserPoolId: process.env.REACT_APP_USER_POOL_ID as string,
