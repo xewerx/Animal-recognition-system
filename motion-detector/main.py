@@ -2,7 +2,6 @@ import cv2
 import numpy as np
 import pandas as pd 
 import threading
-import winsound
 import os
 import time
 from save_snapshot import save_snapshot_as_base64
@@ -59,7 +58,7 @@ def detection_events():
             else:
                 print('Error:', response.status_code, response.text)
                 
-            winsound.Beep(1000, 1000)
+            
 
             time.sleep(10)
     alarm = False
