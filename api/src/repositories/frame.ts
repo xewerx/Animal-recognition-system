@@ -38,4 +38,15 @@ export class FrameRepository extends Repository {
 
     return frames as FrameModel[];
   }
+
+  async findById(id: string): Promise<FrameModel> {
+    const { Item: frame } = await this.documentClient
+      .get({
+        TableName: this.tableName,
+        Key: { id },
+      })
+      .promise();
+
+    return frame as FrameModel;
+  }
 }

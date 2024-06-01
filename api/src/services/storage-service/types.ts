@@ -1,5 +1,6 @@
 import { Frame } from "../../domain/entites/frame";
 
 export interface IStorageService {
-  saveFrame(frame: Frame): Promise<void>;
+  saveFrameData(frame: Frame): Promise<void>;
+  getFrameData(frameId: string): Promise<string>;
 }
