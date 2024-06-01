@@ -23,6 +23,6 @@ export class CreateFrameCommand implements Command<CreateFrameProps, void> {
     });
 
     await queService.sendToQue(frame);
-    await storageService.saveFrame(frame);
+    await storageService.saveFrameData(frame);
   }
 }

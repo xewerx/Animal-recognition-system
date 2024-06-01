@@ -45,3 +45,35 @@ getFrames:
           name: UserPoolAuthorizer
           type: COGNITO_USER_POOLS
           arn: !GetAtt CognitoUserPool.Arn
+
+getFrame:
+  handler: src/lambdas/http/get-frame.handler
+  environment:
+    FRAME_TABLE: !Ref FrameTable
+    BUCKET_NAME: !Ref Bucket
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:GetItem
+      Resource: !GetAtt FrameTable.Arn
+    - Effect: Allow
+      Action:
+        - s3:GetObject
+      Resource:
+        Fn::Join:
+          - ""
+          - - !GetAtt Bucket.Arn
+            - "/*"
+  events:
+    - http:
+        path: frames/{id}
+        method: get
+        request:
+          parameters:
+            paths:
+              id: true
+        cors: true
+        authorizer:
+          name: UserPoolAuthorizer
+          type: COGNITO_USER_POOLS
+          arn: !GetAtt CognitoUserPool.Arn
