@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import { Button, TextField,Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom';
-import { authenticate } from '../services/authenticate';
+import { authenticate } from '../../services/authenticate';
+import './login.css';
+import Navbar from '../../components/Navbar';
 
 const Login = () => {
   const Navigate = useNavigate();
@@ -51,29 +53,30 @@ const Login = () => {
 
   return (
     <div className="login">
-
+      <Navbar/>
       <div className='form'>
-        <div className="formfield">
-          <TextField
-            value={email}
-            onChange={(e) => formInputChange("email", e.target.value)}
-            label="Email"
-          />
-        </div>
-        <div className='formfield'>
-          <TextField
-            value={password}
-            onChange={(e) => { formInputChange("password", e.target.value) }}
-            type="password"
-            label="Password"
-          />
-        </div>
-        <div className='formfield'>
-          <Button type='submit' variant='contained' onClick={handleClick}>Login</Button>
-        </div>
-        <Typography variant="body1">{error}</Typography>
+          <div className="formfield">
+              <TextField
+                  value={email}
+                  onChange={(e) => formInputChange("email", e.target.value)}
+                  label="Email"
+              />
+          </div>
+          <div className='formfield'>
+              <TextField
+                  value={password}
+                  onChange={(e) => formInputChange("password", e.target.value)}
+                  type="password"
+                  label="Password"
+              />
+          </div>
+          <div className='formfield'>
+              <Button type='submit' variant='contained' onClick={handleClick}>Login</Button>
+          </div>
+          {error && (
+              <Typography variant="body1" color="error">{error}</Typography>
+          )}
       </div>
-
     </div>
   )
 }

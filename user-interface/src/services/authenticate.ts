@@ -1,16 +1,16 @@
 import { AuthenticationDetails, CognitoUser } from "amazon-cognito-identity-js";
-import userpool from "../userpool";
+import userpool from "../config/userpool";
 
-export const authenticate = (Email: string, Password: string) => {
+export const authenticate = (email: string, password: string) => {
   return new Promise((resolve, reject) => {
     const user = new CognitoUser({
-      Username: Email,
+      Username: email,
       Pool: userpool,
     });
 
     const authDetails = new AuthenticationDetails({
-      Username: Email,
-      Password,
+      Username: email,
+      Password: password,
     });
 
     user.authenticateUser(authDetails, {
@@ -30,7 +30,6 @@ export const logout = () => {
     user.signOut();
     window.location.href = "/";
   } else {
-    console.warn("No user is currently signed in."); // Optionally, you can log a warning
-    // Redirect or handle the situation as needed
+    console.warn("No user is currently signed in.");
   }
 };
