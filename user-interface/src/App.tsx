@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
-import './App.css';
 import { BrowserRouter,Routes, Route,Navigate  } from 'react-router-dom'
-import Home from './components/Home';
-import Login from './components/Login';
-import Dashboard from './components/Dashboard';
-import userpool from './userpool';
+import Dashboard from './screens/dashboard/Dashboard';
+import userpool from './config/userpool';
+import Home from './screens/home/Home';
+import Login from './screens/login/Login';
 
 function App() {
 

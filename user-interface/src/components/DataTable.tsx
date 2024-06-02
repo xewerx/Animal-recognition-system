@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import './dataTable.css'
 
 interface Frame {
   id: string;
@@ -74,7 +75,7 @@ const DataTable: React.FC<DataTableProps> = ({ token }) => {
               <td>{i}</td>
               <td>{new Date(frame.createdAt).toLocaleString()}</td>
               <td>{frame.predictedClass}</td>
-              <td>{frame.predictionConfidence}</td>
+              <td>{frame.predictionConfidence.toFixed(2)}%</td>
               <td>{new Date(frame.processedAt).toLocaleString()}</td>
               <td>{new Date(frame.updatedAt).toLocaleString()}</td>
             </tr>

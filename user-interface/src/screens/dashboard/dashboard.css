@@ -1,0 +1,26 @@
+.dashboard {
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dashboard .MuiButton-contained {
+    background-color: #6200ea;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.dashboard .MuiButton-contained:hover {
+    background-color: #3700b3;
+}
+
+@media (max-width: 600px) {
+    .dashboard {
+        width: 95%;
+        padding: 10px;
+    }
+}
