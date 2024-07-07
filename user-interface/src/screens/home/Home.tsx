@@ -5,7 +5,7 @@ import './home.css';
 import Navbar from '../../components/Navbar';
 
 const Home = () => {
-    const Navigate=useNavigate();
+    const Navigate = useNavigate()
 
     return (
         <>
@@ -13,7 +13,7 @@ const Home = () => {
                 <Navbar/>
                 <Typography variant='h3'>Animal Recognition System</Typography>
                 <div className='homeButtons'>
-                    <Button style={{margin:'10px'}} variant='contained' onClick={()=>Navigate('/login')}>
+                    <Button style={{margin:'10px'}} variant='contained' onClick={() => Navigate('/login')}>
                         Login
                     </Button>
                 </div>
