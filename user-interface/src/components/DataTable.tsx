@@ -1,24 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './dataTable.css'
-
-interface Frame {
-  id: string;
-  createdAt: string;
-  predictedClass: string;
-  predictionConfidence: number;
-  processedAt: string;
-  updatedAt: string;
-}
+import { useNavigate } from 'react-router-dom';
+import { Frame } from '../types/frame';
 
 interface DataTableProps {
   token: string;
 }
 
 const DataTable: React.FC<DataTableProps> = ({ token }) => {
+  const Navigate = useNavigate()
+  
   const [frames, setFrames] = useState<Frame[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+
+  const onClickRow = (frameId: string) => Navigate(`/frame/${frameId}`)
 
   useEffect(() => {
     const getFramesUrl = `${process.env.REACT_APP_API_URL as string}/prod/frames`
@@ -70,8 +67,7 @@ const DataTable: React.FC<DataTableProps> = ({ token }) => {
       <tbody>
         {
           frames.map((frame, i) => (
-            <tr>
-              {/* <td>{frame.id}</td> */}
+            <tr onClick={() => onClickRow(frame.id)}>
               <td>{i}</td>
               <td>{new Date(frame.createdAt).toLocaleString()}</td>
               <td>{frame.predictedClass}</td>

@@ -1,12 +1,10 @@
 import React from 'react';
 import { AppBar, Toolbar, Typography, Button } from '@mui/material';
 import './navbar.css';
+import { useAuth } from '../hooks/useAuth';
 
-interface Props {
-    handleLogout?: () => void
-}
-
-const Navbar = ({ handleLogout }: Props) => {
+const Navbar = () => {
+  const { handleLogout, isAuthenticated } = useAuth()
 
   return (
     <div className='container'>
@@ -16,7 +14,7 @@ const Navbar = ({ handleLogout }: Props) => {
             Animal Recognition System
           </Typography>
            {
-           handleLogout && 
+           isAuthenticated && 
                 <Button
                     color="inherit"
                     className='button'
