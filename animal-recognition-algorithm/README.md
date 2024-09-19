@@ -46,6 +46,12 @@ You can find downloaded images in `data/images` directory
 pipenv run train_model
 ```
 
+## Test model
+
+```
+pipenv run test_model
+```
+
 ## Deploy lambda docker image to ECR
 
 ```

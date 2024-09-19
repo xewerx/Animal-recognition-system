@@ -20,6 +20,8 @@ download_images = "python scripts/downloader.py 'data/image_ids.txt' --download_
 
 train_model = "python scripts/train_model.py"
 
+test_model = "python scripts/test_model.py"
+
 deploy_lambda_image = "./scripts/deploy_lambda_image.sh"
 
 deploy_lambda = "serverless deploy"

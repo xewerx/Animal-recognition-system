@@ -35,14 +35,14 @@ num_classes = len(class_names)
 print(f'Founded classes: {class_names}')
 
 # Show data before transformation
-plt.figure(figsize=(10, 10))
-for images, labels in train_ds.take(1):
-  for i in range(9):
-    ax = plt.subplot(3, 3, i + 1)
-    plt.imshow(images[i].numpy().astype("uint8"))
-    plt.title(class_names[labels[i]])
-    plt.axis("off")
-plt.show()
+# plt.figure(figsize=(10, 10))
+# for images, labels in train_ds.take(1):
+#   for i in range(9):
+#     ax = plt.subplot(3, 3, i + 1)
+#     plt.imshow(images[i].numpy().astype("uint8"))
+#     plt.title(class_names[labels[i]])
+#     plt.axis("off")
+# plt.show()
 
 # Performance settings before trainging
 AUTOTUNE = tf.data.AUTOTUNE
@@ -65,13 +65,13 @@ data_augmentation = keras.Sequential(
 model = Sequential([
   data_augmentation,
   layers.Rescaling(1./255, input_shape=(IMG_HEIGHT, IMG_WIDTH, 3)),
-  layers.Conv2D(32, 3, padding='same', activation='relu'),
+  layers.Conv2D(128, 3, padding='same', activation='relu'),
   layers.MaxPooling2D(),
   layers.Conv2D(64, 3, padding='same', activation='relu'),
   layers.MaxPooling2D(),
-  layers.Conv2D(128, 3, padding='same', activation='relu'),
+  layers.Conv2D(32, 3, padding='same', activation='relu'),
   layers.MaxPooling2D(),
-  layers.Dropout(0.2),
+  # layers.Dropout(0.2),
   layers.Flatten(),
   layers.Dense(128, activation='relu'),
   layers.Dense(num_classes, name="outputs")
@@ -103,7 +103,8 @@ val_acc = history.history['val_accuracy']
 loss = history.history['loss']
 val_loss = history.history['val_loss']
 
-epochs_range = range(EPOCHS)
+# We need to get number of epochs from history object because of early_stopping
+epochs_range = range(len(history.epoch))
 
 plt.figure(figsize=(8, 8))
 plt.subplot(1, 2, 1)

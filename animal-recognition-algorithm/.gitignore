@@ -2,8 +2,10 @@
 .venv
 data/*.csv
 data/training_images/*
+data/test_images/*
 .DS_Store
 __pycache__
 logs
 .serverless
 node_modules
+models

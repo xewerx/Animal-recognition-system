@@ -14,7 +14,7 @@ def get_img(path):
      return img
 
 def predict_image_class(path):
-  model = tf.keras.models.load_model('models/model.keras')
+  model = tf.keras.models.load_model('models/128-64-32-dropout.keras')
   class_names = get_data_class_names()
 
   img = get_img(path)
@@ -46,10 +46,9 @@ result = {
 for class_name in os.listdir(main_directory):
     subfolder = os.path.join(main_directory, class_name)
     
-    print(subfolder)
-
     for image in os.listdir(subfolder):
         image_path = os.path.join(subfolder, image)
+        print(image_path)
         predicted_class = predict_image_class(image_path)
         if predicted_class == class_name:
             result[class_name] += 1
