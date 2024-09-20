@@ -4,7 +4,7 @@ import userpool from './config/userpool';
 import Home from './screens/home/Home';
 import Login from './screens/login/Login';
 import Frame from './screens/frame/Frame';
-import Dashboard from './screens/dashboard/dashboard';
+import Dashboard from './screens/dashboard/Dashboard';
 import Navbar from './components/Navbar';
 
 function App() {
