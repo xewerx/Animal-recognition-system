@@ -10,9 +10,12 @@ const Navbar = () => {
     <div className='container'>
       <AppBar position="static">
         <Toolbar className='toolbar'>
-          <Typography variant="h6" className='title'>
-            Animal Recognition System
-          </Typography>
+          <div className='logo'>
+            <img className='icon' src="/favicon.png" alt="Lion Favicon" />
+            <Typography variant="h6" className='title'>
+              Animal Recognition System
+            </Typography>
+          </div>
            {
            isAuthenticated && 
                 <Button

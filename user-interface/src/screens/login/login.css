@@ -3,8 +3,9 @@
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
+    width: 30%;
+    max-width: 500px;
+    margin: auto;
     text-align: center;
 }
 
@@ -20,14 +21,14 @@
 }
 
 .formfield .MuiButton-contained {
-    background-color: #6200ea;
+    background-color: #035826;
     color: white;
     transition: background-color 0.3s ease;
     width: 100%;
 }
 
 .formfield .MuiButton-contained:hover {
-    background-color: #3700b3;
+    background-color: #035826;
 }
 
 @media (max-width: 600px) {
