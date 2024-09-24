@@ -11,6 +11,7 @@ load_dotenv()
 
 api_key = os.getenv('API_KEY')
 api_url = os.getenv('API_URL')
+sensitivity = int(os.getenv('MOTION_SENSITIVITY'))
 
 if (os.getenv('USE_RTP_STREAM') == 'true'):
     video_path = 'stream.sdp'
@@ -54,11 +55,11 @@ def on_movement_detected():
                 'x-api-key': api_key,
                 'Content-Type': 'application/json'
             }
-            print(api_key, api_url)
+
             response = requests.post(api_url, json=body, headers=headers)
 
             if response.status_code == 204:
-                print('Frame sent to API succesfully:', response.json())
+                print('Frame sent to API succesfully')
             else:
                 print('Error:', response.status_code, response.text)
                 
@@ -82,7 +83,7 @@ while True:
             start_frame = frame_bw
         
             # value sets the "sensitivity" of motion detection - the lower it is, the more sensitive it is
-            if threshold.sum() > 500: 
+            if threshold.sum() > sensitivity: 
                 alarm_counter += 1
             else:
                 if alarm_counter > 0:
