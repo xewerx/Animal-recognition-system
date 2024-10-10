@@ -3,11 +3,8 @@ import sys
 
 import matplotlib.pyplot as plt
 import tensorflow as tf
-
-from tensorflow import keras
-from tensorflow.keras import layers # type: ignore
-from tensorflow.keras.models import Sequential # type: ignore
-from tensorflow.keras.callbacks import EarlyStopping # type: ignore
+import keras
+from keras import layers
 
 sys.path.append('../animal-recognition-algorithm')
 from config import DATA_PATH, IMG_HEIGHT, IMG_WIDTH, BATCH_SIZE, EPOCHS, MODELS_PATH
@@ -62,16 +59,16 @@ data_augmentation = keras.Sequential(
 )
 
 # Creating a model
-model = Sequential([
+model = keras.Sequential([
   data_augmentation,
   layers.Rescaling(1./255, input_shape=(IMG_HEIGHT, IMG_WIDTH, 3)),
-  layers.Conv2D(128, 3, padding='same', activation='relu'),
+  layers.Conv2D(32, 3, padding='same', activation='relu'),
   layers.MaxPooling2D(),
   layers.Conv2D(64, 3, padding='same', activation='relu'),
   layers.MaxPooling2D(),
-  layers.Conv2D(32, 3, padding='same', activation='relu'),
+  layers.Conv2D(128, 3, padding='same', activation='relu'),
   layers.MaxPooling2D(),
-  # layers.Dropout(0.2),
+  layers.Dropout(0.2),
   layers.Flatten(),
   layers.Dense(128, activation='relu'),
   layers.Dense(num_classes, name="outputs")
@@ -83,7 +80,7 @@ model.compile(optimizer='adam',
               metrics=['accuracy'])
 
 # Early Stopping callback
-early_stopping = EarlyStopping(monitor='val_loss', patience=5, restore_best_weights=True)
+early_stopping = keras.callbacks.EarlyStopping(monitor='val_loss', patience=5, restore_best_weights=True)
 
 # Training
 history = model.fit(

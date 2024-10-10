@@ -19,7 +19,7 @@ if (os.getenv('USE_RTP_STREAM') == 'true'):
     # required settings for reading rtp stream
     os.environ["OPENCV_FFMPEG_CAPTURE_OPTIONS"] = "protocol_whitelist;file,rtp,udp"
 else:
-    video_path = os.path.join('.', 'input', 'tiger.mp4')
+    video_path = os.path.join('.', 'input', 'tiger2.mp4')
 
 cap = cv2.VideoCapture(video_path)
 

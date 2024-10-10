@@ -2,24 +2,28 @@ import os
 import sys
 import numpy as np
 import tensorflow as tf
+import keras
 
 sys.path.append('../animal-recognition-algorithm')
 from config import IMG_HEIGHT, IMG_WIDTH
 from src.utils.get_data_class_names import get_data_class_names
 
+print(keras.__version__)
+print(tf.__version__)
+
 def get_img(path):
-     img = tf.keras.utils.load_img(
+     img = keras.utils.load_img(
       path, target_size=(IMG_HEIGHT, IMG_WIDTH)
     )
      return img
 
 def predict_image_class(path):
-  model = tf.keras.models.load_model('models/128-64-32-dropout.keras')
+  model = keras.models.load_model('models/128-64-32-dropout.keras')
   class_names = get_data_class_names()
 
   img = get_img(path)
   
-  img_array = tf.keras.utils.img_to_array(img)
+  img_array = keras.utils.img_to_array(img)
   img_array = tf.expand_dims(img_array, 0) # Create a batch
 
   predictions = model.predict(img_array)

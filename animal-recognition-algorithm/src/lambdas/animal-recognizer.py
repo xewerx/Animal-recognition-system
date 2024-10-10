@@ -2,17 +2,28 @@ import os
 import numpy as np
 import tensorflow as tf
 import boto3
+import keras
 
 from datetime import datetime
 
 from config import CLASS_NAMES
 from get_img_from_base64 import get_img_from_base64 # type: ignore
 
-FRAME_DYNAMO_TABLE = os.environ["FRAME_DYNAMO_TABLE"]
-FRAME_S3_BUCKET = os.environ["FRAME_S3_BUCKET"]
+print("Keras version: ", keras.__version__)
+print("Tensorflow version: ", tf.__version__)
 
 s3 = boto3.client('s3')
 dynamodb = boto3.client('dynamodb')
+
+FRAME_DYNAMO_TABLE = os.environ["FRAME_DYNAMO_TABLE"]
+FRAME_S3_BUCKET = os.environ["FRAME_S3_BUCKET"]
+
+local_model_path = '/tmp/model.keras'
+s3.download_file(FRAME_S3_BUCKET, 'model.keras', local_model_path)
+print("MODEL DOWNLOADED")
+
+model = keras.models.load_model(local_model_path)
+print("MODEL LOADED")
 
 def handler(event, _):
     print("Received event", event)
@@ -25,11 +36,9 @@ def handler(event, _):
 
         image_base64 = get_image_from_s3_by_id(frame_id)
 
-        model = tf.keras.models.load_model('models/model.keras')
-
         img = get_img_from_base64(image_base64)
         
-        img_array = tf.keras.utils.img_to_array(img)
+        img_array = keras.utils.img_to_array(img)
         img_array = tf.expand_dims(img_array, 0) # Create a batch
 
         predictions = model.predict(img_array)
